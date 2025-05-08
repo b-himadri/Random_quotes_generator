@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Quote Generator</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body style="background-color: #f4f4f8; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
+
+    <div style="background-color: #fff; border-radius: 12px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); padding: 40px; width: 80%; max-width: 600px; text-align: center;">
+        <div id="quote" style="font-family: 'Playfair Display', serif; font-size: 1.8em; color: #333; line-height: 1.6; margin-bottom: 30px; font-style: italic;">Click the button to see a quote!</div>
+        <button onclick="getQuote()" style="background-color: #a2b8d6; color: #fff; border: none; border-radius: 8px; padding: 12px 24px; font-size: 1.1em; cursor: pointer; transition: background-color 0.3s ease;">Get Inspired</button>
+    </div>
+
+    <script>
+        function getQuote(){
+            fetch('/quote')
+            .then(response=>response.json())
+            .then(data=>{
+                document.getElementById('quote').textContent = data.quote;
+            })
+            .catch(error => {
+              document.getElementById('quote').textContent = 'Something went wrong.';
+              console.error(error);
+            });
+        }
+    </script>
+
+</body>
+</html>
